@@ -1,6 +1,7 @@
 'use strict'
 
 const { test, trait } = use('Test/Suite')('User Controller Functional Test')
+const { v4: uuidv4 } = require('uuid');
 
 trait("Test/ApiClient");
 
@@ -11,7 +12,9 @@ test("Test User File Data Publish", async ({ assert, client }) => {
     "salary": 1000,
     "age": 25 
   }
-  const response = await client.post("/users").header('fileType', 'csv').send(userData).end();
+  let uuid = await uuidv4()
+  
+  const response = await client.post("/users").header('fileType', 'csv').header('correlationId', uuid).send(userData).end();
 
   response.assertStatus(200);
   assert.isDefined(response.body.data)
