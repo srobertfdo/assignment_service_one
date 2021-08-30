@@ -1,0 +1,140 @@
+/users:
+  post:
+    summary: Store user files
+    tags:
+    - Manage User File Data
+    operationId: Storeuserfiles
+    deprecated: false
+    produces:
+    - application/json
+    parameters:
+    - name: fileType
+      in: header
+      required: true
+      type: string
+      description: ''
+    - name: Body
+      in: body
+      required: true
+      description: ''
+      schema:
+        title: StoreuserfilesRequest
+        example:
+          name: everything tested
+          dob: 2020-02-12
+          salary: 1221231
+          age: 25
+        type: object
+        properties:
+          name:
+            type: string
+          dob:
+            type: string
+          salary:
+            type: integer
+            format: int32
+          age:
+            type: integer
+            format: int32
+        required:
+        - name
+        - dob
+        - salary
+        - age
+    responses:
+      '200':
+        description: 'User details created!'
+        headers: {}
+      '422':
+        description: 'Validation error!'
+        headers: {}
+      '500':
+        description: 'Application error!'
+        headers: {}
+/users/{uuid}:
+    get:
+      summary: Get user file data by uuid
+      tags:
+      - Manage User File Data
+      operationId: Getuserfiledatabyuuid
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: fileType
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: 'User file details!'
+          headers: {}
+        '400':
+          description: 'User file not found!'
+          headers: {}
+        '500':
+          description: 'Application error!'
+          headers: {}
+    put:
+      summary: Update user files by uuid
+      tags:
+      - Manage User File Data
+      operationId: Updateuserfilesbyuuid
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: fileType
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: uuid
+        in: path
+        required: true
+        type: string
+        description: ''
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          title: UpdateuserfilesbyuuidRequest
+          example:
+            name: everything tested updated
+            dob: 2020-02-12
+            salary: 1221231
+            age: 25
+          type: object
+          properties:
+            name:
+              type: string
+            dob:
+              type: string
+            salary:
+              type: integer
+              format: int32
+            age:
+              type: integer
+              format: int32
+          required:
+          - name
+          - dob
+          - salary
+          - age
+      responses:
+        '200':
+          description: 'User details updated!'
+          headers: {}
+        '422':
+          description: 'Validation error!'
+          headers: {}
+        '500':
+          description: 'Application error!'
+          headers: {}
