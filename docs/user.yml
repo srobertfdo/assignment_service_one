@@ -61,11 +61,6 @@
       produces:
       - application/json
       parameters:
-      - name: fileType
-        in: header
-        required: true
-        type: string
-        description: ''
       - name: uuid
         in: path
         required: true
